@@ -25,12 +25,14 @@ RUN apt-get update && \
     rm -rf /tmp/{telegram.tar.xz,Telegram} && \
     rm /etc/fonts/conf.d/10-scale-bitmap-fonts.conf && \
     fc-cache -fv && \
+    curl https://desktop.telegram.org/changelog | grep anchor | head -n 1 | cut -d '>' -f 7 | cut -d ' ' -f 2 > /version && \
     DEBIAN_FRONTEND=noniteractive apt-get purge -y \
     wget \
     curl \
     xz-utils &&\
     apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* 
+    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 ENV QT_XKB_CONFIG_ROOT=/usr/share/X11/xkb
 
